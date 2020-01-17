@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: get-gpu
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: get-gpu
+            image: eu.gcr.io/playground-s-11-d756fa/gke-cost-app:v1
+            args:
+            - python
+            - gpu.py
+          restartPolicy: OnFailure
